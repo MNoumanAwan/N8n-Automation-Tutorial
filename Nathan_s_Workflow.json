@@ -282,13 +282,24 @@
           }
         ]
       ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "6e3d8141-fe52-4bbb-b85a-77b8157bd805",
+  "versionId": "6cafa636-ab77-490d-a851-4d423cb56f3a",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "890bcf05f6de62865a89ba38b54d1723cb4acaabd0a63a4cf0ff4a260739da26"
