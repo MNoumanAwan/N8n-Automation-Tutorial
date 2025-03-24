@@ -96,8 +96,8 @@
       "type": "n8n-nodes-base.airtable",
       "typeVersion": 2.1,
       "position": [
-        940,
-        -100
+        1020,
+        -120
       ],
       "id": "9b0570cb-2127-4077-b417-9e9b5a7764ae",
       "name": "Airtable",
@@ -122,6 +122,16 @@
               "id": "785bdc1c-421e-4876-b4ce-8fa63bae4cfd",
               "leftValue": "={{ $json.orderStatus }}",
               "rightValue": "processing",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "ca9677bb-b152-4947-8225-27cc433cb34c",
+              "leftValue": "={{ $json.employeeName }}",
+              "rightValue": "Mario",
               "operator": {
                 "type": "string",
                 "operation": "equals",
@@ -165,8 +175,8 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        660,
-        -100
+        860,
+        -140
       ],
       "id": "11c085aa-280f-486f-906f-56ff619a7dcb",
       "name": "Edit Fields"
@@ -228,6 +238,19 @@
       ],
       "id": "2c590987-f5ec-4b91-9dc2-03adb876347c",
       "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "jsCode": "let items = $input.all();\nlet totalBooked = items.length;\nlet bookedSum = 0;\n\nfor (let i=0; i < items.length; i++) {\n  bookedSum = bookedSum + items[i].json.orderPrice;\n}\n\nreturn [{ json: {totalBooked, bookedSum} }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        660,
+        -140
+      ],
+      "id": "e67e233e-f760-4689-bc3b-401023998c97",
+      "name": "Code1"
     }
   ],
   "pinData": {},
@@ -247,7 +270,7 @@
       "main": [
         [
           {
-            "node": "Edit Fields",
+            "node": "Code1",
             "type": "main",
             "index": 0
           }
@@ -293,13 +316,24 @@
           }
         ]
       ]
+    },
+    "Code1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": true,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "6cafa636-ab77-490d-a851-4d423cb56f3a",
+  "versionId": "20cb671d-e1f1-4d18-b1e5-6f9966b0a8fe",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "890bcf05f6de62865a89ba38b54d1723cb4acaabd0a63a4cf0ff4a260739da26"
